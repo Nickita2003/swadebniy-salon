@@ -64,7 +64,7 @@ const products = [
 
 // Таймер обратного отсчета
 function startCountdown() {
-  const openingDate = new Date("2024-09-01T10:00:00");
+  const openingDate = new Date("2025-09-01T10:00:00");
   const countdownElement = document.getElementById("countdown");
   const openedMessageElement = document.getElementById("opened-message");
 
@@ -241,4 +241,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initFilterButtons();
   initSmoothScroll();
 });
+
 

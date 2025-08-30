@@ -1,7 +1,7 @@
 // Конфигурация
 const CONFIG = {
   openingDate: "2025-09-01T10:00:00", // Дата открытия
-  salonName: 'Свадебный салон "Элегантность"',
+  salonName: 'Свадебный салон "Невеста"',
   address: "г. Москва, ул. Свадебная, д. 1",
   phone: "+7 (495) 123-45-67",
   email: "info@elegance-wedding.ru",
@@ -241,5 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initFilterButtons();
   initSmoothScroll();
 });
+
 
 

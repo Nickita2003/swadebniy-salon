@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Свадебный салон "Элегантность" - Скоро открытие!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="logo">Свадебный салон "Элегантность"</h1>
+        <nav class="nav">
+          <ul>
+            <li><a href="#dresses">Платья</a></li>
+            <li><a href="#accessories">Аксессуары</a></li>
+            <li><a href="#map">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section id="countdown" class="countdown">
+        <div class="container">
+          <h2>Скоро открытие!</h2>
+          <p>Мы откроемся 1 сентября 2025 года</p>
+          <div class="timer">
+            <div class="time-block">
+              <span class="time-value" id="days">30</span>
+              <span class="time-label">дней</span>
+            </div>
+            <div class="time-block">
+              <span class="time-value" id="hours">20</span>
+              <span class="time-label">часов</span>
+            </div>
+            <div class="time-block">
+              <span class="time-value" id="minutes">50</span>
+              <span class="time-label">минут</span>
+            </div>
+            <div class="time-block">
+              <span class="time-value" id="seconds">06</span>
+              <span class="time-label">секунд</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="opened-message" class="opened-message" style="display: none">
+        <div class="container">
+          <h2>Мы открылись! Добро пожаловать!</h2>
+          <p>Приходите к нам по адресу: ул. Свадебная, д. 1</p>
+        </div>
+      </section>
+
+      <section class="intro-section">
+        <div class="container">
+          <h2>Добро пожаловать в наш свадебный салон!</h2>
+          <p>
+            Мы рады сообщить об открытии нашего нового салона, где каждая
+            невеста найдет свой идеальный образ для самого важного дня в жизни.
+          </p>
+        </div>
+      </section>
+
+      <section id="dresses" class="dress-gallery">
+        <div class="container">
+          <h2>Свадебные платья</h2>
+          <div id="dresses-container" class="gallery-grid">
+            <!-- Платья будут загружены через JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <section id="accessories" class="accessories">
+        <div class="container">
+          <h2>Свадебные аксессуары</h2>
+          <div class="category-filter">
+            <button class="filter-btn active" data-category="all">
+              Все аксессуары
+            </button>
+            <button class="filter-btn" data-category="veils">Фаты</button>
+            <button class="filter-btn" data-category="tiaras">Диадемы</button>
+            <button class="filter-btn" data-category="shoes">Обувь</button>
+            <button class="filter-btn" data-category="accessories">
+              Другие аксессуары
+            </button>
+          </div>
+          <div id="accessories-container" class="accessories-grid">
+            <!-- Аксессуары будут загружены через JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <section id="map" class="map-section">
+        <div class="container">
+          <h2>Мы находимся</h2>
+          <div class="map-container">
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3A6b7d17b7b7b7b7b7b7b7b7b7b7b7b7b7&amp;source=constructor"
+              width="100%"
+              height="400"
+              frameborder="0"
+              title="Местоположение свадебного салона"
+            >
+            </iframe>
+          </div>
+          <div class="contact-info">
+            <div class="contact-item">
+              <h3>Адрес</h3>
+              <p>г. Москва, ул. Свадебная, д. 1</p>
+            </div>
+            <div class="contact-item">
+              <h3>Телефон</h3>
+              <p>+7 (495) 123-45-67</p>
+            </div>
+            <div class="contact-item">
+              <h3>Часы работы</h3>
+              <p>Пн-Пт: 10:00 - 20:00</p>
+              <p>Сб-Вс: 11:00 - 19:00</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Свадебный салон "Элегантность"</h3>
+            <p>
+              Мы поможем вам создать идеальный образ для самого важного дня в
+              вашей жизни.
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3>Контакты</h3>
+            <p>г. Москва, ул. Свадебная, д. 1</p>
+            <p>+7 (495) 123-45-67</p>
+            <p>info@elegance-wedding.ru</p>
+          </div>
+          <div class="footer-section">
+            <h3>Часы работы</h3>
+            <p>Пн-Пт: 10:00 - 20:00</p>
+            <p>Сб-Вс: 11:00 - 19:00</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Свадебный салон "Элегантность". Все права защищены.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

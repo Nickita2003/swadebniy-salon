@@ -18,9 +18,9 @@ const products = [
     name: "Свадебное платье «Амелия»",
     price: 45000,
     images: [
-      "images/платье 2.jpg",
-      "images/платье 6.jpg",
-      "images/платье 5.jpg",
+      "платье 2.jpg",
+      "платье 6.jpg",
+      "платье 5.jpg",
     ],
     category: "dresses",
     description: "Роскошное платье из французского кружева с длинным шлейфом",
@@ -29,7 +29,7 @@ const products = [
     id: 2,
     name: "Свадебное платье «Изабелла»",
     price: 38000,
-    images: ["images/платье.jpg", "images/платье 3.jpg", "images/платье 4.jpg"],
+    images: ["платье.jpg", "платье 3.jpg", "платье 4.jpg"],
     category: "dresses",
     description: "Элегантное платье прямого кроя с открытой спиной",
   },
@@ -37,7 +37,7 @@ const products = [
     id: 3,
     name: "Фата «Нежность»",
     price: 8500,
-    images: ["images/фата.jpeg"],
+    images: ["фата.jpeg"],
     category: "veils",
     description: "Длинная фата из тончайшего тюля с жемчужной вышивкой",
   },
@@ -45,7 +45,7 @@ const products = [
     id: 4,
     name: "Диадема «Королева»",
     price: 12000,
-    images: ["images/диадема.jpg"],
+    images: ["диадема.jpg"],
     category: "tiaras",
     description: "Изящная диадема с кристаллами Swarovski",
   },
@@ -53,7 +53,7 @@ const products = [
     id: 5,
     name: "Туфли «Золушка»",
     price: 9500,
-    images: ["images/туфли.jpeg"],
+    images: ["туфли.jpeg"],
     category: "shoes",
     description: "Элегантные туфли на каблуке с жемчужными деталями",
   },
@@ -407,3 +407,4 @@ document.addEventListener("DOMContentLoaded", () => {
   const app = new WeddingSalonApp(CONFIG, products);
   app.init();
 });
+

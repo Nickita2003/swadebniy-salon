@@ -28,7 +28,7 @@ const products = [
     id: 3,
     name: "Фата «Нежность»",
     price: 8500,
-    images: ["фатп.jpeg"],
+    images: ["фата.jpeg"],
     category: "veils",
     description: "Длинная фата из тончайшего тюля с жемчужной вышивкой",
   },
@@ -157,6 +157,11 @@ function renderAccessories(category = "all") {
 
   accessoriesContainer.innerHTML = "";
 
+  if (accessories.length === 0) {
+    accessoriesContainer.innerHTML = "<p>Нет товаров в этой категории</p>";
+    return;
+  }
+
   accessories.forEach((item) => {
     const accessoryCard = document.createElement("div");
     accessoryCard.className = "accessory-card";
@@ -181,7 +186,9 @@ function initFilterButtons() {
   const filterButtons = document.querySelectorAll(".filter-btn");
 
   filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      
       // Убираем активный класс у всех кнопок
       filterButtons.forEach((btn) => btn.classList.remove("active"));
 

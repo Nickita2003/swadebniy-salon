@@ -1,16 +1,3 @@
-// Конфигурация
-const CONFIG = {
-  openingDate: "2025-09-01T15:00:00", // Дата открытия
-  salonName: 'Свадебный салон "Элегантность"',
-  address: "г. Москва, ул. Свадебная, д. 1",
-  phone: "+7 (495) 123-45-67",
-  email: "info@elegance-wedding.ru",
-  workHours: {
-    weekday: "Пн-Пт: 10:00 - 20:00",
-    weekend: "Сб-Вс: 11:00 - 19:00",
-  },
-};
-
 // Данные о товарах
 const products = [
   {
@@ -18,9 +5,9 @@ const products = [
     name: "Свадебное платье «Амелия»",
     price: 45000,
     images: [
+      "платье.jpg",
       "платье 2.jpg",
-      "платье 6.jpg",
-      "платье 5.jpg",
+      "платье 3.jpg",
     ],
     category: "dresses",
     description: "Роскошное платье из французского кружева с длинным шлейфом",
@@ -29,7 +16,11 @@ const products = [
     id: 2,
     name: "Свадебное платье «Изабелла»",
     price: 38000,
-    images: ["платье.jpg", "платье 3.jpg", "платье 4.jpg"],
+    images: [
+      "платье 4.jpg",
+      "платье 5.jpg",
+      "платье 6.jpg",
+    ],
     category: "dresses",
     description: "Элегантное платье прямого кроя с открытой спиной",
   },
@@ -37,7 +28,7 @@ const products = [
     id: 3,
     name: "Фата «Нежность»",
     price: 8500,
-    images: ["фата.jpeg"],
+    images: ["фатп.jpeg"],
     category: "veils",
     description: "Длинная фата из тончайшего тюля с жемчужной вышивкой",
   },
@@ -59,61 +50,25 @@ const products = [
   },
 ];
 
-// Утилиты
-const Utils = {
-  formatPrice: (price) => {
-    return price.toLocaleString("ru-RU") + " руб.";
-  },
-
-  preloadImages: (imageArray) => {
-    imageArray.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  },
-};
-
 // Таймер обратного отсчета
-class CountdownTimer {
-  constructor(openingDate) {
-    this.openingDate = new Date(openingDate);
-    this.timerInterval = null;
-    this.isOpened = false;
+function startCountdown() {
+  const openingDate = new Date("2024-09-01T10:00:00");
+  const countdownElement = document.getElementById("countdown");
+  const openedMessageElement = document.getElementById("opened-message");
 
-    this.daysElement = document.getElementById("days");
-    this.hoursElement = document.getElementById("hours");
-    this.minutesElement = document.getElementById("minutes");
-    this.secondsElement = document.getElementById("seconds");
-    this.countdownElement = document.getElementById("countdown");
-    this.openedMessageElement = document.getElementById("opened-message");
-  }
+  const daysElement = document.getElementById("days");
+  const hoursElement = document.getElementById("hours");
+  const minutesElement = document.getElementById("minutes");
+  const secondsElement = document.getElementById("seconds");
 
-  start() {
-    this.checkOpeningStatus();
-
-    if (!this.isOpened) {
-      this.timerInterval = setInterval(() => this.update(), 1000);
-      this.update(); // Первоначальное обновление
-    }
-  }
-
-  checkOpeningStatus() {
+  const timer = setInterval(() => {
     const now = new Date();
-    this.isOpened = now >= this.openingDate;
-
-    if (this.isOpened) {
-      this.showOpeningMessage();
-    }
-  }
-
-  update() {
-    const now = new Date();
-    const difference = this.openingDate.getTime() - now.getTime();
+    const difference = openingDate.getTime() - now.getTime();
 
     if (difference <= 0) {
-      clearInterval(this.timerInterval);
-      this.isOpened = true;
-      this.showOpeningMessage();
+      clearInterval(timer);
+      countdownElement.style.display = "none";
+      openedMessageElement.style.display = "block";
       return;
     }
 
@@ -124,53 +79,21 @@ class CountdownTimer {
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    this.daysElement.textContent = days.toString().padStart(2, "0");
-    this.hoursElement.textContent = hours.toString().padStart(2, "0");
-    this.minutesElement.textContent = minutes.toString().padStart(2, "0");
-    this.secondsElement.textContent = seconds.toString().padStart(2, "0");
-  }
-
-  showOpeningMessage() {
-    if (this.countdownElement) {
-      this.countdownElement.style.display = "none";
-    }
-    if (this.openedMessageElement) {
-      this.openedMessageElement.style.display = "block";
-    }
-  }
+    daysElement.textContent = days.toString().padStart(2, "0");
+    hoursElement.textContent = hours.toString().padStart(2, "0");
+    minutesElement.textContent = minutes.toString().padStart(2, "0");
+    secondsElement.textContent = seconds.toString().padStart(2, "0");
+  }, 1000);
 }
 
-// Галерея товаров
-class ProductGallery {
-  constructor(products) {
-    this.products = products;
-    this.preloadImages();
-  }
+// Отображение платьев
+function renderDresses() {
+  const dressesContainer = document.getElementById("dresses-container");
+  const dresses = products.filter((product) => product.category === "dresses");
 
-  preloadImages() {
-    const allImages = [];
-    this.products.forEach((product) => {
-      product.images.forEach((image) => allImages.push(image));
-    });
-    Utils.preloadImages(allImages);
-  }
+  dressesContainer.innerHTML = "";
 
-  renderDresses() {
-    const dressesContainer = document.getElementById("dresses-container");
-    if (!dressesContainer) return;
-
-    const dresses = this.products.filter(
-      (product) => product.category === "dresses"
-    );
-    dressesContainer.innerHTML = "";
-
-    dresses.forEach((dress) => {
-      const dressCard = this.createDressCard(dress);
-      dressesContainer.appendChild(dressCard);
-    });
-  }
-
-  createDressCard(dress) {
+  dresses.forEach((dress) => {
     const dressCard = document.createElement("div");
     dressCard.className = "dress-card";
 
@@ -192,7 +115,7 @@ class ProductGallery {
             <div class="dress-info">
                 <h3>${dress.name}</h3>
                 ${dress.description ? `<p class="dress-description">${dress.description}</p>` : ""}
-                <p class="dress-price">${Utils.formatPrice(dress.price)}</p>
+                <p class="dress-price">${dress.price.toLocaleString("ru-RU")} руб.</p>
             </div>
         `;
 
@@ -217,32 +140,24 @@ class ProductGallery {
       });
     }
 
-    return dressCard;
+    dressesContainer.appendChild(dressCard);
+  });
+}
+
+// Отображение аксессуаров
+function renderAccessories(category = "all") {
+  const accessoriesContainer = document.getElementById("accessories-container");
+  let accessories = products.filter(
+    (product) => product.category !== "dresses"
+  );
+
+  if (category !== "all") {
+    accessories = accessories.filter((item) => item.category === category);
   }
 
-  renderAccessories(category = "all") {
-    const accessoriesContainer = document.getElementById(
-      "accessories-container"
-    );
-    if (!accessoriesContainer) return;
+  accessoriesContainer.innerHTML = "";
 
-    let accessories = this.products.filter(
-      (product) => product.category !== "dresses"
-    );
-
-    if (category !== "all") {
-      accessories = accessories.filter((item) => item.category === category);
-    }
-
-    accessoriesContainer.innerHTML = "";
-
-    accessories.forEach((item) => {
-      const accessoryCard = this.createAccessoryCard(item);
-      accessoriesContainer.appendChild(accessoryCard);
-    });
-  }
-
-  createAccessoryCard(item) {
+  accessories.forEach((item) => {
     const accessoryCard = document.createElement("div");
     accessoryCard.className = "accessory-card";
 
@@ -253,158 +168,57 @@ class ProductGallery {
             <div class="accessory-info">
                 <h3>${item.name}</h3>
                 ${item.description ? `<p>${item.description}</p>` : ""}
-                <p class="price">${Utils.formatPrice(item.price)}</p>
+                <p class="price">${item.price.toLocaleString("ru-RU")} руб.</p>
             </div>
         `;
 
-    return accessoryCard;
-  }
+    accessoriesContainer.appendChild(accessoryCard);
+  });
 }
 
-// Менеджер фильтров
-class FilterManager {
-  constructor() {
-    this.currentCategory = "all";
-    this.filterButtons = document.querySelectorAll(".filter-btn");
-  }
+// Инициализация фильтрации аксессуаров
+function initFilterButtons() {
+  const filterButtons = document.querySelectorAll(".filter-btn");
 
-  init() {
-    this.filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        this.handleFilterClick(button);
-      });
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Убираем активный класс у всех кнопок
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+      // Добавляем активный класс к текущей кнопке
+      button.classList.add("active");
+
+      // Фильтруем аксессуары
+      const category = button.getAttribute("data-category");
+      renderAccessories(category);
     });
-  }
-
-  handleFilterClick(button) {
-    // Убираем активный класс у всех кнопок
-    this.filterButtons.forEach((btn) => btn.classList.remove("active"));
-
-    // Добавляем активный класс к текущей кнопке
-    button.classList.add("active");
-
-    // Получаем категорию для фильтрации
-    this.currentCategory = button.getAttribute("data-category");
-
-    // Вызываем событие изменения фильтра
-    document.dispatchEvent(
-      new CustomEvent("filterChanged", {
-        detail: { category: this.currentCategory },
-      })
-    );
-  }
+  });
 }
 
-// Менеджер навигации
-class NavigationManager {
-  constructor() {
-    this.initSmoothScroll();
-  }
+// Плавная прокрутка к якорям
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
 
-  initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
 
-        const targetId = this.getAttribute("href");
-        if (targetId === "#") return;
-
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: "smooth",
-          });
-        }
-      });
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
     });
-  }
-}
-
-// Основной код приложения
-class WeddingSalonApp {
-  constructor(config, products) {
-    this.config = config;
-    this.products = products;
-    this.timer = new CountdownTimer(config.openingDate);
-    this.gallery = new ProductGallery(products);
-    this.filterManager = new FilterManager();
-    this.navigationManager = new NavigationManager();
-  }
-
-  init() {
-    // Инициализация таймера
-    this.timer.start();
-
-    // Рендер товаров
-    this.gallery.renderDresses();
-    this.gallery.renderAccessories();
-
-    // Инициализация фильтров
-    this.filterManager.init();
-
-    // Инициализация навигации
-    this.navigationManager.init();
-
-    // Обработчик изменения фильтра
-    document.addEventListener("filterChanged", (e) => {
-      this.gallery.renderAccessories(e.detail.category);
-    });
-
-    // Обновляем информацию в футере
-    this.updateFooterInfo();
-  }
-
-  updateFooterInfo() {
-    // Обновляем контактную информацию в футере
-    const footerSections = document.querySelectorAll(".footer-section");
-    if (footerSections.length >= 3) {
-      // Вторая секция - контакты
-      const contactsSection = footerSections[1];
-      contactsSection.querySelector("p:nth-child(2)").textContent =
-        this.config.address;
-      contactsSection.querySelector("p:nth-child(3)").textContent =
-        this.config.phone;
-      contactsSection.querySelector("p:nth-child(4)").textContent =
-        this.config.email;
-
-      // Третья секция - часы работы
-      const hoursSection = footerSections[2];
-      hoursSection.querySelector("p:nth-child(2)").textContent =
-        this.config.workHours.weekday;
-      hoursSection.querySelector("p:nth-child(3)").textContent =
-        this.config.workHours.weekend;
-    }
-
-    // Обновляем информацию в блоке контактов
-    const contactItems = document.querySelectorAll(".contact-item");
-    if (contactItems.length >= 3) {
-      contactItems[0].querySelector("p").textContent = this.config.address;
-      contactItems[1].querySelector("p").textContent = this.config.phone;
-
-      const hoursElement = contactItems[2];
-      hoursElement.querySelector("p:nth-child(2)").textContent =
-        this.config.workHours.weekday;
-      hoursElement.querySelector("p:nth-child(3)").textContent =
-        this.config.workHours.weekend;
-    }
-
-    // Обновляем название салона в хедере
-    const logoElement = document.querySelector(".logo");
-    if (logoElement) {
-      logoElement.textContent = this.config.salonName;
-    }
-
-    // Обновляем сообщение об открытии
-    const openedMessage = document.querySelector(".opened-message p");
-    if (openedMessage) {
-      openedMessage.textContent = `Приходите к нам по адресу: ${this.config.address}`;
-    }
-  }
+  });
 }
 
 // Инициализация при загрузке страницы
 document.addEventListener("DOMContentLoaded", () => {
-  const app = new WeddingSalonApp(CONFIG, products);
-  app.init();
+  startCountdown();
+  renderDresses();
+  renderAccessories();
+  initFilterButtons();
+  initSmoothScroll();
 });
-

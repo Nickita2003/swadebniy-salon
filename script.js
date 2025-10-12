@@ -51,11 +51,11 @@ const products = [
     name: "Свадебное платье «Амарель»",
     price: 18700,
     images: [
-      "images 2/dresses1.jpg",
-      "images 2/dresses2.jpg",
-      "images 2/dresses3.jpg",
-      "images 2/dresses4.jpg",
-      "images 2/dresses5.jpg",
+      "dresses21.jpg",
+      "dresses22.jpg",
+      "dresses23.jpg",
+      "dresses24.jpg",
+      "dresses25.jpg",
     ],
     category: "dresses",
   },
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

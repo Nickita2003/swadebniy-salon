@@ -20,10 +20,10 @@ const products = [
     name: "Свадебное платье «Амелия»",
     price: 25500,
     images: [
-      "images 1/dresses1.jpg",
-      "images 1/dresses2.jpg",
-      "images 1/dresses3.jpg",
-      "images 1/dresses4.jpg",
+      "dresses01.jpg",
+      "dresses02.jpg",
+      "dresses03.jpg",
+      "dresses04.jpg",
     ],
     video: "images 1/dresses.mp4",
     category: "dresses",
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

@@ -64,12 +64,12 @@ const products = [
     name: "Свадебное платье «Жозефина»",
     price: 29500,
     images: [
-      "images 3/dresses1.jpg",
-      "images 3/dresses2.jpg",
-      "images 3/dresses3.jpg",
-      "images 3/dresses4.jpg",
+      "dresses31.jpg",
+      "dresses32.jpg",
+      "dresses33.jpg",
+      "dresses34.jpg",
     ],
-    video: "images 3/dresses.mp4",
+    video: "3dresses.mp4",
     category: "dresses",
   },
   {
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

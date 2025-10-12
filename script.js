@@ -77,16 +77,16 @@ const products = [
     name: "Свадебное платье «Королева»",
     price: 41200,
     images: [
-      "images 4/dresses1.jpg",
-      "images 4/dresses2.jpg",
-      "images 4/dresses3.jpg",
-      "images 4/dresses4.jpg",
-      "images 4/dresses5.jpg",
-      "images 4/dresses6.jpg",
-      "images 4/dresses7.jpg",
-      "images 4/dresses8.jpg",
+      "dresses41.jpg",
+      "dresses42.jpg",
+      "dresses43.jpg",
+      "dresses44.jpg",
+      "dresses45.jpg",
+      "dresses46.jpg",
+      "dresses47.jpg",
+      "dresses48.jpg",
     ],
-    video: "images 4/dresses5.mp4",
+    video: "dresses5.mp4",
     category: "dresses",
   },
   {
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

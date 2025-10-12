@@ -33,17 +33,17 @@ const products = [
     name: "Свадебное платье «Изабелла»",
     price: 32400,
     images: [
-      "images/dresses1.jpg",
-      "images/dresses2.jpg",
-      "images/dresses3.jpg",
-      "images/dresses4.jpg",
-      "images/dresses5.jpg",
-      "images/dresses6.jpg",
-      "images/dresses7.jpg",
-      "images/dresses8.jpg",
-      "images/dresses9.jpg",
+      "dresses1.jpg",
+      "dresses2.jpg",
+      "dresses3.jpg",
+      "dresses4.jpg",
+      "dresses5.jpg",
+      "dresses6.jpg",
+      "dresses7.jpg",
+      "dresses8.jpg",
+      "dresses9.jpg",
     ],
-    video: "images/dresses2.mp4",
+    video: "dresses2.mp4",
     category: "dresses",
   },
   {
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

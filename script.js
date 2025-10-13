@@ -173,13 +173,13 @@ const products = [
     name: "Свадебное платье «Лебединная песнь»",
     price: 35200,
     images: [
-      "images 10/dresses1.jpg",
-      "images 10/dresses2.jpg",
-      "images 10/dresses3.jpg",
-      "images 10/dresses4.jpg",
-      "images 10/dresses5.jpg",
+      "dresses1.1.jpg",
+      "dresses1.2.jpg",
+      "dresses1.3.jpg",
+      "dresses1.4.jpg",
+      "dresses1.5.jpg",
     ],
-    videos: ["images 10/dresses2.mp4", "images 10/dresses1.mp4"],
+    videos: ["dresses2.2.mp4", "dresses1.1.mp4"],
     category: "dresses",
   },
   {
@@ -187,13 +187,13 @@ const products = [
     name: "Свадебное платье «Гармония»",
     price: 26700,
     images: [
-      "images 11/dresses1.jpg",
-      "images 11/dresses2.jpg",
-      "images 11/dresses3.jpg",
-      "images 11/dresses4.jpg",
-      "images 11/dresses5.jpg",
+      "dresses11.1.jpg",
+      "dresses11.2.jpg",
+      "dresses11.3.jpg",
+      "dresses11.4.jpg",
+      "dresses11.5.jpg",
     ],
-    video: ["images 11/dresses.mp4"],
+    video: ["dresses11.mp4"],
     category: "dresses",
   },
   {
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

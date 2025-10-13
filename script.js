@@ -1,3 +1,4 @@
+
 // Конфигурация
 const CONFIG = {
   openingDate: "2025-10-03T10:00:00",
@@ -8,12 +9,11 @@ const CONFIG = {
     weekday: "Пн-Пт: 09:00 - 17:00",
     weekend: "Сб-Вс: 09:00 - 17:00",
   },
-  // Настройка отображения цен
-  showPrices: false, // Теперь показываем цены, поменять на true когда появятся цены
+  showPrices: false,// поставить true для отображения цен
   currency: "руб.",
 };
 
-// Данные о платьях с ценами
+// Данные о платьях с ценами (полная версия)
 const products = [
   {
     id: 1,
@@ -640,3 +640,4 @@ document.addEventListener('error', function(e) {
     console.warn('Ошибка загрузки изображения:', e.target.src);
   }
 }, true);
+

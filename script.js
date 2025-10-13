@@ -237,8 +237,8 @@ const products = [
     ],
     category: "dresses",
   },
-];
 
+  {
     id: 16,
     name: "Фата «Нежность»",
     price: 5500,
@@ -640,4 +640,5 @@ document.addEventListener('error', function(e) {
     console.warn('Ошибка загрузки изображения:', e.target.src);
   }
 }, true);
+
 

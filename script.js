@@ -125,15 +125,15 @@ const products = [
     name: "Свадебное платье «Мечта»",
     price: 33100,
     images: [
-      "images 7/dresses1.jpg",
-      "images 7/dresses2.jpg",
-      "images 7/dresses3.jpg",
-      "images 7/dresses4.jpg",
+      "dresses81.jpg",
+      "dresses82.jpg",
+      "dresses83.jpg",
+      "dresses84.jpg",
     ],
     videos: [
-      "images 7/dresses.mp4",
-      "images 7/dresses1.mp4",
-      "images 7/dresses2.mp4",
+      "dresses8.1.mp4",
+      "dresses8.mp4",
+      "dresses81.mp4",
     ],
     category: "dresses",
   },
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

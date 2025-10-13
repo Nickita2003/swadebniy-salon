@@ -25,7 +25,7 @@ const products = [
       "dresses03.jpg",
       "dresses04.jpg",
     ],
-    video: "images 1/dresses.mp4",
+    video: "dresses.mp4",
     category: "dresses",
   },
   {
@@ -640,5 +640,6 @@ document.addEventListener('error', function(e) {
     console.warn('Ошибка загрузки изображения:', e.target.src);
   }
 }, true);
+
 
 

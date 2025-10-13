@@ -94,15 +94,15 @@ const products = [
     name: "Свадебное платье «Лунная невеста»",
     price: 36800,
     images: [
-      "images 5/dresses1.jpg",
-      "images 5/dresses2.jpg",
-      "images 5/dresses3.jpg",
-      "images 5/dresses4.jpg",
-      "images 5/dresses5.jpg",
-      "images 5/dresses6.jpg",
-      "images 5/dresses7.jpg",
+      "dresses51.jpg",
+      "dresses52.jpg",
+      "dresses53.jpg",
+      "dresses54.jpg",
+      "dresses55.jpg",
+      "dresses56.jpg",
+      "dresses57.jpg",
     ],
-    videos: ["images 5/dresses.mp4", "images 5/dresses6.mp4"],
+    videos: ["dresses5.mp4", "dresses6.mp4"],
     category: "dresses",
   },
   {
@@ -110,14 +110,14 @@ const products = [
     name: "Свадебное платье «Очарование»",
     price: 27600,
     images: [
-      "images 6/dresses1.jpg",
-      "images 6/dresses2.jpg",
-      "images 6/dresses3.jpg",
-      "images 6/dresses4.jpg",
-      "images 6/dresses5.jpg",
-      "images 6/dresses6.jpg",
+      "dresses71.jpg",
+      "dresses72.jpg",
+      "dresses73.jpg",
+      "dresses74.jpg",
+      "dresses75.jpg",
+      "dresses76.jpg",
     ],
-    videos: ["images 6/dresses2.MP4", "images 6/dresses.MP4"],
+    videos: ["dresses7.MP4", "dresses7.1.MP4"],
     category: "dresses",
   },
   {
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

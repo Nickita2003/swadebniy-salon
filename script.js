@@ -142,12 +142,12 @@ const products = [
     name: "Свадебное платье «Адель»",
     price: 24300,
     images: [
-      "images 8/dresses1.jpg",
-      "images 8/dresses2.jpg",
-      "images 8/dresses3.jpg",
-      "images 8/dresses4.jpg",
-      "images 8/dresses5.jpg",
-      "images 8/dresses6.jpg",
+      "dresses91.jpg",
+      "dresses92.jpg",
+      "dresses93.jpg",
+      "dresses94.jpg",
+      "dresses95.jpg",
+      "dresses96.jpg",
     ],
     category: "dresses",
   },
@@ -156,16 +156,16 @@ const products = [
     name: "Свадебное платье «Ариэль»",
     price: 38900,
     images: [
-      "images 9/dresses1.jpg",
-      "images 9/dresses2.jpg",
-      "images 9/dresses3.jpg",
-      "images 9/dresses4.jpg",
-      "images 9/dresses5.jpg",
-      "images 9/dresses6.jpg",
-      "images 9/dresses7.jpg",
-      "images 9/dresses8.jpg",
+      "dresses9.1.jpg",
+      "dresses9.2.jpg",
+      "dresses9.3.jpg",
+      "dresses9.4.jpg",
+      "dresses9.5.jpg",
+      "dresses9.6.jpg",
+      "dresses9.7.jpg",
+      "dresses9.8.jpg",
     ],
-    videos: ["images 9/dresses2.mp4", "images 9/dresses1.mp4"],
+    videos: ["dresses9.2.mp4", "dresses9.1.mp4"],
     category: "dresses",
   },
   {
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

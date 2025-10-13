@@ -628,23 +628,3 @@ p {
   color: #d4af37;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
-.dress-price {
-  font-size: 1.3em;
-  font-weight: bold;
-  color: #000;
-  margin: 10px 0 5px 0;
-  padding: 8px 0;
-  text-align: center;
-
-  border-radius: 8px;
-}
-
-.dress-info h3 {
-  margin-bottom: 8px;
-}
-
-.dress-description {
-  margin-top: 8px;
-  color: #666;
-  font-size: 0.9em;
-}

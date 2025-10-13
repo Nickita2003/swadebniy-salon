@@ -201,13 +201,13 @@ const products = [
     name: "Свадебное платье «Элитное очарование»",
     price: 44500,
     images: [
-      "images 12/dresses1.jpg",
-      "images 12/dresses2.jpg",
-      "images 12/dresses3.jpg",
-      "images 12/dresses4.jpg",
-      "images 12/dresses5.jpg",
+      "dresses12.1.jpg",
+      "dresses12.2.jpg",
+      "dresses12.3.jpg",
+      "dresses12.4.jpg",
+      "dresses12.5.jpg",
     ],
-    video: ["images 12/dresses.mp4"],
+    video: ["dresses12.mp4"],
     category: "dresses",
   },
   {
@@ -215,13 +215,13 @@ const products = [
     name: "Свадебное платье «Елизавета»",
     price: 29800,
     images: [
-      "images 13/dresses1.jpg",
-      "images 13/dresses2.jpg",
-      "images 13/dresses3.jpg",
-      "images 13/dresses4.jpg",
-      "images 13/dresses5.jpg",
+      "dresses13.1.jpg",
+      "dresses13.2.jpg",
+      "dresses13.3.jpg",
+      "dresses13.4.jpg",
+      "dresses13.5.jpg",
     ],
-    video: ["images 13/dresses.mp4"],
+    video: ["dresses13.mp4"],
     category: "dresses",
   },
   {
@@ -229,11 +229,11 @@ const products = [
     name: "Свадебное платье «Сладкая девочка»",
     price: 21300,
     images: [
-      "images 14/dresses1.jpg",
-      "images 14/dresses2.jpg",
-      "images 14/dresses3.jpg",
-      "images 14/dresses4.jpg",
-      "images 14/dresses5.jpg",
+      "dresses14.1.jpg",
+      "dresses14.2.jpg",
+      "dresses14.3.jpg",
+      "dresses14.4.jpg",
+      "dresses14.5.jpg",
     ],
     category: "dresses",
   },
@@ -564,6 +564,7 @@ document.addEventListener(
   },
   true
 );
+
 
 
 

@@ -239,9 +239,25 @@ const products = [
   },
 ];
 
-// Переменные для управления отображением платьев
+    id: 16,
+    name: "Фата «Нежность»",
+    price: 5500,
+    images: ["fata.jpeg"],
+    category: "veils",
+  },
+  {
+    id: 17,
+    name: "Диадема «Королева»",
+    price: 3200,
+    images: ["diadema.jpg"],
+    category: "tiaras",
+  },
+];
+
+// Переменные для управления отображением
 let allDressesVisible = false;
-const visibleDressesCount = 5;
+let allAccessoriesVisible = false;
+const visibleItemsCount = 5;
 
 // Проверка существования элемента
 function getElement(selector) {
@@ -254,18 +270,76 @@ function getElement(selector) {
 
 // Форматирование цены
 function formatPrice(price) {
-  return new Intl.NumberFormat("ru-RU").format(price) + " " + CONFIG.currency;
+  return new Intl.NumberFormat('ru-RU').format(price) + ' ' + CONFIG.currency;
+}
+
+// Отображение аксессуаров
+function renderAccessories() {
+  const accessoriesContainer = document.getElementById("accessories-container");
+  const showMoreBtn = document.getElementById("show-more-accessories-btn");
+  
+  if (!accessoriesContainer) {
+    console.error('Контейнер для аксессуаров не найден!');
+    return;
+  }
+
+  const accessories = products.filter(
+    product => product.category === "veils" || product.category === "tiaras"
+  );
+
+  accessoriesContainer.innerHTML = "";
+
+  // Определяем, сколько аксессуаров показывать
+  const accessoriesToShow = allAccessoriesVisible 
+    ? accessories 
+    : accessories.slice(0, visibleItemsCount);
+
+  // Создаем и добавляем карточки аксессуаров
+  accessoriesToShow.forEach(item => {
+    const accessoryCard = document.createElement("div");
+    accessoryCard.className = "accessory-card";
+
+    // ДОБАВЛЕНО: Формируем HTML для цены аксессуаров
+    const priceHTML = CONFIG.showPrices && item.price 
+      ? `<div class="accessory-price">${formatPrice(item.price)}</div>`
+      : '';
+
+    accessoryCard.innerHTML = `
+      <div class="accessory-image">
+        <img src="${item.images[0]}" alt="${item.name}" loading="lazy">
+      </div>
+      <div class="accessory-info">
+        <h3>${item.name}</h3>
+        ${priceHTML} <!-- ДОБАВЛЕНО отображение цены -->
+        ${item.description ? `<p>${item.description}</p>` : ""}
+      </div>
+    `;
+
+    accessoriesContainer.appendChild(accessoryCard);
+  });
+
+  // Обновляем состояние кнопки "Показать все аксессуары"
+  if (showMoreBtn) {
+    if (accessories.length <= visibleItemsCount) {
+      showMoreBtn.style.display = "none";
+    } else {
+      showMoreBtn.style.display = "block";
+      showMoreBtn.textContent = allAccessoriesVisible 
+        ? "Свернуть" 
+        : `Показать все аксессуары (${accessories.length})`;
+    }
+  }
 }
 
 // Таймер обратного отсчета
 function startCountdown() {
   const countdownDate = new Date(CONFIG.openingDate).getTime();
-  const daysElement = getElement("#days");
-  const hoursElement = getElement("#hours");
-  const minutesElement = getElement("#minutes");
-  const secondsElement = getElement("#seconds");
-  const countdownSection = getElement("#countdown");
-  const openedMessage = getElement("#opened-message");
+  const daysElement = getElement('#days');
+  const hoursElement = getElement('#hours');
+  const minutesElement = getElement('#minutes');
+  const secondsElement = getElement('#seconds');
+  const countdownSection = getElement('#countdown');
+  const openedMessage = getElement('#opened-message');
 
   if (!daysElement || !countdownSection) return;
 
@@ -275,25 +349,20 @@ function startCountdown() {
 
     if (distance < 0) {
       clearInterval(timer);
-      if (countdownSection) countdownSection.style.display = "none";
-      if (openedMessage) openedMessage.style.display = "block";
+      if (countdownSection) countdownSection.style.display = 'none';
+      if (openedMessage) openedMessage.style.display = 'block';
       return;
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    if (daysElement) daysElement.textContent = days.toString().padStart(2, "0");
-    if (hoursElement)
-      hoursElement.textContent = hours.toString().padStart(2, "0");
-    if (minutesElement)
-      minutesElement.textContent = minutes.toString().padStart(2, "0");
-    if (secondsElement)
-      secondsElement.textContent = seconds.toString().padStart(2, "0");
+    if (daysElement) daysElement.textContent = days.toString().padStart(2, '0');
+    if (hoursElement) hoursElement.textContent = hours.toString().padStart(2, '0');
+    if (minutesElement) minutesElement.textContent = minutes.toString().padStart(2, '0');
+    if (secondsElement) secondsElement.textContent = seconds.toString().padStart(2, '0');
   }, 1000);
 }
 
@@ -304,51 +373,40 @@ function createDressCard(dress) {
   dressCard.dataset.id = dress.id;
 
   // Обработка видео форматов
-  const videos = Array.isArray(dress.videos)
-    ? dress.videos
-    : dress.video
-      ? Array.isArray(dress.video)
-        ? dress.video
-        : [dress.video]
+  const videos = Array.isArray(dress.videos) 
+    ? dress.videos 
+    : dress.video 
+      ? (Array.isArray(dress.video) ? dress.video : [dress.video])
       : [];
 
   const allMedia = [...dress.images, ...videos];
   const hasMultipleMedia = allMedia.length > 1;
 
   // Формируем HTML для цены
-  const priceHTML =
-    CONFIG.showPrices && dress.price
-      ? `<div class="dress-price">${formatPrice(dress.price)}</div>`
-      : "";
+  const priceHTML = CONFIG.showPrices && dress.price 
+    ? `<div class="dress-price">${formatPrice(dress.price)}</div>`
+    : '';
 
   dressCard.innerHTML = `
     <div class="image-container">
       <img src="${dress.images[0]}" alt="${dress.name}" class="dress-image" loading="lazy">
-      ${videos
-        .map(
-          (video, index) => `
+      ${videos.map((video, index) => `
         <video class="dress-video" data-index="${index}" preload="none" controls style="display: none;">
           <source src="${video}" type="video/mp4">
           Ваш браузер не поддерживает видео
         </video>
-      `
-        )
-        .join("")}
-      ${
-        hasMultipleMedia
-          ? `
+      `).join('')}
+      ${hasMultipleMedia ? `
         <button class="nav-button prev" aria-label="Предыдущее изображение">&#8249;</button>
         <button class="nav-button next" aria-label="Следующее изображение">&#8250;</button>
         <div class="image-counter">1 / ${allMedia.length}</div>
-      `
-          : ""
-      }
-      ${videos.length > 0 ? `<button class="video-button" aria-label="Воспроизвести видео">▶ Видео</button>` : ""}
+      ` : ''}
+      ${videos.length > 0 ? `<button class="video-button" aria-label="Воспроизвести видео">▶ Видео</button>` : ''}
     </div>
     <div class="dress-info">
       <h3>${dress.name}</h3>
       ${priceHTML}
-      ${dress.description ? `<p class="dress-description">${dress.description}</p>` : ""}
+      ${dress.description ? `<p class="dress-description">${dress.description}</p>` : ''}
     </div>
   `;
 
@@ -374,7 +432,7 @@ function initMediaNavigation(dressCard, dress, allMedia) {
 
   const updateMediaDisplay = () => {
     // Скрываем все видео
-    videoElements.forEach((video) => {
+    videoElements.forEach(video => {
       video.style.display = "none";
       video.pause();
     });
@@ -411,8 +469,7 @@ function initMediaNavigation(dressCard, dress, allMedia) {
   // Обработчики навигации
   if (prevButton) {
     prevButton.addEventListener("click", () => {
-      currentMediaIndex =
-        (currentMediaIndex - 1 + allMedia.length) % allMedia.length;
+      currentMediaIndex = (currentMediaIndex - 1 + allMedia.length) % allMedia.length;
       updateMediaDisplay();
     });
   }
@@ -438,9 +495,7 @@ function initMediaNavigation(dressCard, dress, allMedia) {
         // Воспроизводим первое видео
         if (videoElements.length > 0) {
           const firstVideo = videoElements[0];
-          firstVideo
-            .play()
-            .catch((e) => console.log("Автовоспроизведение заблокировано:", e));
+          firstVideo.play().catch(e => console.log("Автовоспроизведение заблокировано:", e));
         }
       }
     });
@@ -452,69 +507,92 @@ function initMediaNavigation(dressCard, dress, allMedia) {
 
 // Отображение платьев
 function renderDresses() {
-  const dressesContainer = getElement("#dresses-container");
-  const showMoreBtn = getElement("#show-more-btn");
-
+  const dressesContainer = document.getElementById("dresses-container");
+  const showMoreBtn = document.getElementById("show-more-btn");
+  
   if (!dressesContainer) {
-    console.error("Контейнер для платьев не найден!");
+    console.error('Контейнер для платьев не найден!');
     return;
   }
 
-  const dresses = products.filter((product) => product.category === "dresses");
-  console.log(
-    `Всего платьев: ${dresses.length}, Показывать все: ${allDressesVisible}`
-  );
-
+  const dresses = products.filter(product => product.category === "dresses");
+  
   dressesContainer.innerHTML = "";
 
   // Определяем, сколько платьев показывать
-  const dressesToShow = allDressesVisible
-    ? dresses
-    : dresses.slice(0, visibleDressesCount);
+  const dressesToShow = allDressesVisible 
+    ? dresses 
+    : dresses.slice(0, visibleItemsCount);
 
-  console.log(`Будет показано платьев: ${dressesToShow.length}`);
+  console.log(`Отображаем ${dressesToShow.length} платьев из ${dresses.length}`);
 
   // Создаем и добавляем карточки платьев
-  dressesToShow.forEach((dress) => {
+  dressesToShow.forEach(dress => {
     const dressCard = createDressCard(dress);
     dressesContainer.appendChild(dressCard);
   });
 
-  // Обновляем состояние кнопки "Показать все"
+  // Обновляем состояние кнопки "Показать все платья"
   if (showMoreBtn) {
-    if (dresses.length <= visibleDressesCount) {
+    if (dresses.length <= visibleItemsCount) {
       showMoreBtn.style.display = "none";
     } else {
       showMoreBtn.style.display = "block";
-      showMoreBtn.textContent = allDressesVisible
-        ? "Свернуть"
+      showMoreBtn.textContent = allDressesVisible 
+        ? "Свернуть" 
         : `Показать все платья (${dresses.length})`;
     }
   }
 }
 
 // Инициализация кнопки "Показать все платья"
-function initShowMoreButton() {
-  const showMoreBtn = getElement("#show-more-btn");
+function initShowMoreDressesButton() {
+  const showMoreBtn = document.getElementById('show-more-btn');
   if (!showMoreBtn) {
     console.error('Кнопка "Показать все платья" не найдена!');
     return;
   }
 
-  console.log('Кнопка "Показать все платья" инициализирована');
+  console.log('Кнопка "Показать все платья" найдена, добавляем обработчик');
 
-  showMoreBtn.addEventListener("click", () => {
-    console.log("Кнопка нажата! Текущее состояние:", allDressesVisible);
+  showMoreBtn.addEventListener('click', function() {
+    console.log('Кнопка нажата!');
     allDressesVisible = !allDressesVisible;
-    console.log("Новое состояние:", allDressesVisible);
     renderDresses();
-
+    
     // Плавная прокрутка к началу секции после переключения
     if (allDressesVisible) {
-      const dressesSection = getElement("#dresses");
+      const dressesSection = document.getElementById('dresses');
       if (dressesSection) {
         setTimeout(() => {
-          dressesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          dressesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  });
+}
+
+// Инициализация кнопки "Показать все аксессуары"
+function initShowMoreAccessoriesButton() {
+  const showMoreBtn = document.getElementById('show-more-accessories-btn');
+  if (!showMoreBtn) {
+    console.error('Кнопка "Показать все аксессуары" не найдена!');
+    return;
+  }
+
+  console.log('Кнопка "Показать все аксессуары" найдена, добавляем обработчик');
+
+  showMoreBtn.addEventListener('click', function() {
+    console.log('Кнопка аксессуаров нажата!');
+    allAccessoriesVisible = !allAccessoriesVisible;
+    renderAccessories();
+    
+    // Плавная прокрутка к началу секции после переключения
+    if (allAccessoriesVisible) {
+      const accessoriesSection = document.getElementById('accessories');
+      if (accessoriesSection) {
+        setTimeout(() => {
+          accessoriesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
       }
     }
@@ -523,18 +601,18 @@ function initShowMoreButton() {
 
 // Плавная прокрутка к якорям
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
       e.preventDefault();
-
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-
+      
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+          behavior: 'smooth',
+          block: 'start'
         });
       }
     });
@@ -542,40 +620,23 @@ function initSmoothScroll() {
 }
 
 // Инициализация при загрузке страницы
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Инициализация свадебного салона...");
-
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Инициализация свадебного салона...');
+  
   // Запускаем основные функции
   startCountdown();
   renderDresses();
+  renderAccessories();
   initSmoothScroll();
-  initShowMoreButton();
+  initShowMoreDressesButton();
+  initShowMoreAccessoriesButton();
+  
+  console.log('Инициализация завершена');
 });
 
 // Обработка ошибок загрузки изображений
-document.addEventListener(
-  "error",
-  function (e) {
-    if (e.target.tagName === "IMG") {
-      console.warn("Ошибка загрузки изображения:", e.target.src);
-      // Можно установить placeholder изображение
-      // e.target.src = 'placeholder.jpg';
-    }
-  },
-  true
-);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.addEventListener('error', function(e) {
+  if (e.target.tagName === 'IMG') {
+    console.warn('Ошибка загрузки изображения:', e.target.src);
+  }
+}, true);

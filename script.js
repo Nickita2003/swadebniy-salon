@@ -237,20 +237,16 @@ const products = [
     ],
     category: "dresses",
   },
-{
+
+ {
     id: 16,
     name: "Свадебное платье «Сладкая девочка»",
     price: 21300,
     images: [
-      "dresses14.1.jpg",
-      "dresses14.2.jpg",
-      "dresses14.3.jpg",
-      "dresses14.4.jpg",
-      "dresses14.5.jpg",
+      "qwen.jpg",
     ],
     category: "dresses",
   },
-
   {
     id: 17,
     name: "Фата «Нежность»",
@@ -653,6 +649,7 @@ document.addEventListener('error', function(e) {
     console.warn('Ошибка загрузки изображения:', e.target.src);
   }
 }, true);
+
 
 
 
